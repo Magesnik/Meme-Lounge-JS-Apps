@@ -1,18 +1,20 @@
-import { html } from '../node_modules/lit-html/lit-html.js'
+import { html } from '../node_modules/lit-html/lit-html.js';
 
-`<!-- Login Page ( Only for guest users ) -->
-<section id="login">
-    <form id="login-form">
-        <div class="container">
-            <h1>Login</h1>
-            <label for="email">Email</label>
-            <input id="email" placeholder="Enter Email" name="email" type="text">
-            <label for="password">Password</label>
-            <input id="password" type="password" placeholder="Enter Password" name="password">
-            <input type="submit" class="registerbtn button" value="Login">
-            <div class="container signin">
-                <p>Dont have an account?<a href="#">Sign up</a>.</p>
+export const loginPage = (ctx) => html`
+    <!-- Login Page ( Only for guest users ) -->
+    <section id="login">
+        <form id="login-form">
+            <div class="container">
+                <h1>Влизане</h1>
+                <label for="email">Имейл</label>
+                <input id="email" placeholder="Въведете имейл" name="email" type="email" required>
+                <label for="password">Парола</label>
+                <input id="password" type="password" placeholder="Въведете парола" name="password" required>
+                <input type="submit" class="registerbtn button" value="Влизане">
+                <div class="container signin">
+                    <p>Нямате профил? <a href="/register">Регистрация</a>.</p>
+                </div>
             </div>
-        </div>
-    </form>
-</section>`
+        </form>
+    </section>
+`;

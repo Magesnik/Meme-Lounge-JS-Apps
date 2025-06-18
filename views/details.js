@@ -1,26 +1,38 @@
-import { html } from '../node_modules/lit-html/lit-html.js'
+import { html } from '../node_modules/lit-html/lit-html.js';
+import { until } from '../node_modules/lit-html/directives/until.js';
+import { getMemeById } from '../api/data.js';
 
-`<!-- Details Meme Page (for guests and logged users) -->
-<section id="meme-details">
-    <h1>Meme Title: Bad code can present some problems
+async function loadMeme(id, user) {
+    try {
+        const meme = await getMemeById(id);
+        const isOwner = user && user._id === meme._ownerId;
+        
+        return html`
+            <section id="meme-details">
+                <h1>Заглавие на мeme: ${meme.title}</h1>
+                <div class="meme-details">
+                    <div class="meme-img">
+                        <img alt="meme-alt" src="${meme.imageUrl}">
+                    </div>
+                    <div class="meme-description">
+                        <h2>Описание на мeme</h2>
+                        <p>${meme.description}</p>
 
-    </h1>
-    <div class="meme-details">
-        <div class="meme-img">
-            <img alt="meme-alt" src="/images/3.png">
-        </div>
-        <div class="meme-description">
-            <h2>Meme Description</h2>
-            <p>
-                Being a programmer is a fun job. And many funny incidents occur throughout a
-                programmer’s career.
-                Here are a few jokes that can be relatable to you as a programmer.
-            </p>
+                        ${isOwner ? html`
+                            <!-- Buttons Edit/Delete should be displayed only for creator of this meme  -->
+                            <a class="button warning" href="/edit/${meme._id}">Редактиране</a>
+                            <button class="button danger delete-btn" data-id="${meme._id}">Изтриване</button>
+                        ` : ''}
+                    </div>
+                </div>
+            </section>
+        `;
+    } catch (error) {
+        console.error('Грешка при зареждане на мeme:', error);
+        return html`<p>Грешка при зареждане на мeme.</p>`;
+    }
+}
 
-            <!-- Buttons Edit/Delete should be displayed only for creator of this meme  -->
-            <a class="button warning" href="#">Edit</a>
-            <button class="button danger">Delete</button>
-
-        </div>
-    </div>
-</section>`
+export const detailsPage = (ctx) => html`
+    ${until(loadMeme(ctx.params.id, ctx.user), html`<p>Зареждане...</p>`)}
+`;

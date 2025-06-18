@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bg">
 
 <head>
     <meta charset="UTF-8">
@@ -20,23 +20,23 @@
 
         <!-- Navigation -->
         <nav>
-            <a href="/catalog">All Memes</a>
+            <a href="/catalog">Всички мемета</a>
              <!-- Logged users -->
-            <div class="user">
-                <a href="/create">Create Meme</a>
+            <div class="user" style="display: none;">
+                <a href="/create">Създай мeme</a>
                 <div class="profile">
-                    <span>Welcome, {email}</span>
-                    <a href="/profile">My Profile</a>
-                    <a id="logoutBtn" href="javascript:void(0)">Logout</a>
+                    <span>Добре дошъл, {email}</span>
+                    <a href="/profile">Моят профил</a>
+                    <a id="logoutBtn" href="javascript:void(0)">Излизане</a>
                 </div>
             </div>
             <!-- Guest users -->
             <div class="guest">
                 <div class="profile">
-                    <a href="/login">Login</a>
-                    <a href="/register">Register</a>
+                    <a href="/login">Влизане</a>
+                    <a href="/register">Регистрация</a>
                 </div>
-                <a class="active" href="/">Home Page</a>
+                <a class="active" href="/">Начална страница</a>
             </div>
         </nav>
 
@@ -44,10 +44,9 @@
         <main>
         </main>
 
-
         <!-- Footer  -->
         <footer class="footer">
-            <p>Created by SoftUni Delivery Team</p>
+            <p>Създадено от SoftUni Delivery Team</p>
         </footer>
     </div>
 </body>
